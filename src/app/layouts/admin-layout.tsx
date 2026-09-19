@@ -1,102 +1,40 @@
-import {
-    Activity,
-    CreditCard,
-    Gauge,
-    LayoutDashboard,
-    Users,
-    WalletCards,
-} from 'lucide-react';
-import { NavLink, Outlet } from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
-const navigation = [
-    {
-        label: 'Dashboard',
-        to: '/dashboard',
-        icon: LayoutDashboard,
-    },
-    {
-        label: 'Users',
-        to: '/users',
-        icon: Users,
-    },
-    {
-        label: 'Subscriptions',
-        to: '/subscriptions',
-        icon: WalletCards,
-    },
-    {
-        label: 'Payments',
-        to: '/payments',
-        icon: CreditCard,
-    },
-    {
-        label: 'AI Usage',
-        to: '/ai-usage',
-        icon: Activity,
-    },
-    {
-        label: 'System',
-        to: '/system',
-        icon: Gauge,
-    },
-]
+import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar.tsx";
+import {Separator} from "@/components/ui/separator";
+import {AppSidebar} from "@/widgets/app-sidebar";
 
 export function AdminLayout() {
     return (
-        <div className="flex min-h-screen bg-neutral-950 text-white">
-            <aside className="flex w-64 flex-col border-r border-neutral-800 bg-neutral-950">
-                <div className="flex h-16 items-center border-b border-neutral-800 px-6">
-                    <span className="text-lg font-semibold tracking-tight">
-                        Clio Admin
-                    </span>
-                </div>
+        <SidebarProvider>
+            <AppSidebar/>
 
-                <nav className="flex flex-1 flex-col gap-1 p-3">
-                    {navigation.map((item) => {
-                        const Icon = item.icon;
+            <SidebarInset>
+                <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                    <SidebarTrigger className="-ml-1"/>
 
-                        return (
-                            <NavLink
-                                key={item.to}
-                                to={item.to}
-                                className={({ isActive }) => [
-                                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors',
-                                    isActive
-                                        ? 'bg-neutral-800 text-white'
-                                        : 'text-neutral-400 hover:bg-neutral-900 hover:text-white',
-                                    ].join(' ')
-                                }
-                            >
-                                <Icon size={18} strokeWidth={1.8} />
+                    <Separator
+                        orientation="vertical"
+                        className="mr-2 h-4"
+                    />
 
-                                <span>{item.label}</span>
-                            </NavLink>
-                        )
-                    })}
-                </nav>
+                    <div className="flex flex-col">
+                        <span className="text-sm font-medium">
+                            Clio Admin
+                        </span>
 
-                <div className="border-t border-neutral-800 p-4">
-                    <div className="text-xs text-neutral-500">
-                        Clio AI
+                        <span className="text-xs text-muted-foreground">
+                            Administration Console
+                        </span>
                     </div>
-
-                    <div className="mt-1 text-xs text-neutral-600">
-                        Admin Console
-                    </div>
-                </div>
-            </aside>
-
-            <main className="min-w-0 flex-1">
-                <header className="flex h-16 items-center border-b border-neutral-800 px-8">
-                    <span className="text-sm text-neutral-400">
-                        Administration
-                    </span>
                 </header>
 
-                <div className="p-8">
-                    <Outlet />
-                </div>
-            </main>
-        </div>
+                <main className="flex flex-1 flex-col">
+                    <div className="flex-1 p-6 lg:p-8">
+                        <Outlet/>
+                    </div>
+                </main>
+            </SidebarInset>
+        </SidebarProvider>
     )
 }

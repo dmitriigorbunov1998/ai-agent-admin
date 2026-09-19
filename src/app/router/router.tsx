@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom'
 
 import {AdminLayout} from '@/app/layouts/admin-layout'
-import {AiUsagePage} from '@/pages/ai-usage-page/ui/ai-usage-page'
+import {AiUsagePage} from '@/pages/ai-usage/ui/ai-usage-page'
 import {DashboardPage} from '@/pages/dashboard/ui/dashboard-page'
 import {PaymentsPage} from '@/pages/payments/ui/payments-page'
 import {SubscriptionsPage} from '@/pages/subscriptions/ui/subscriptions-page'
