@@ -1,11 +1,14 @@
 export class ApiError extends Error {
+    public readonly status: number;
+
     constructor(
-        public readonly status: number,
+        status: number,
         message: string,
     ) {
         super(message);
 
         this.name = 'ApiError';
+        this.status = status;
     }
 }
 
@@ -55,5 +58,5 @@ export async function apiClient<T>(
         )
     }
 
-    return response.json() as Promise<T>;
+    return await response.json() as T;
 }
