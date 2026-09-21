@@ -5,36 +5,63 @@ import {
     Zap,
 } from 'lucide-react';
 
+import type {DashboardSummary} from '@/pages/dashboard/model/types.ts';
+
 import {StatCard} from '@/widgets/dashboard-stats/ui/stat-card.tsx';
 
-const stats = [
-    {
-        title: 'Total users',
-        value: '1.284',
-        description: 'Registered Telegram users',
-        icon: Users,
-    },
-    {
-        title: 'Active subscriptions',
-        value: '312',
-        description: 'Lite and Pro subscriptions',
-        icon: WalletCards,
-    },
-    {
-        title: 'Revenue',
-        value: '₽186,240',
-        description: 'Total successful payments',
-        icon: CreditCard,
-    },
-    {
-        title: 'Energy usage',
-        value: '8.491',
-        description: 'Energy units consumed',
-        icon: Zap,
-    },
-]
+type DashboardStatsProps = {
+    data: DashboardSummary;
+}
 
-export function DashboardStats() {
+const rubFormatter = new Intl.NumberFormat(
+    'ru-RU',
+    {
+        style: 'currency',
+        currency: 'RUB',
+        maximumFractionDigits: 0,
+    },
+)
+
+export function DashboardStats({data}: DashboardStatsProps) {
+    const stats = [
+        {
+            title: 'Total users',
+
+            value: data.users.total.toLocaleString(),
+
+            description: `${data.users.active.toLocaleString()} active users`,
+
+            icon: Users,
+        },
+        {
+            title: 'Paid subscriptions',
+
+            value: data.subscriptions.paid.toLocaleString(),
+
+            description: `${data.subscriptions.lite} Lite · ${data.subscriptions.pro} Pro`,
+
+            icon: WalletCards,
+        },
+        {
+            title: 'Revenue',
+
+            value: rubFormatter.format(data.payments.revenueRub),
+
+            description: `${data.payments.succeeded.toLocaleString()} successful payments`,
+
+            icon: CreditCard,
+        },
+        {
+            title: 'Energy balance',
+
+            value: data.energy.totalBalance.toLocaleString(),
+
+            description: 'Available energy across users',
+
+            icon: Zap,
+        },
+    ]
+
     return (
         <div className="grid gap-4 mt:grid-cols-2 xl:grid-cols-4">
             {stats.map((stat) => (

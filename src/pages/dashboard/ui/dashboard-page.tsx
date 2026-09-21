@@ -1,7 +1,33 @@
+import {useQuery} from '@tanstack/react-query';
+
 import {Badge} from '@/components/ui/badge.tsx';
 import {DashboardStats} from '@/widgets/dashboard-stats';
 
+import {getDashboardSummary} from '@/pages/dashboard/api/get-dashboard-summary';
+import {dashboardQueryKeys} from '@/pages/dashboard/model/query-keys';
+
 export function DashboardPage() {
+    const dashboardQuery = useQuery({
+        queryKey: dashboardQueryKeys.summary(),
+        queryFn: getDashboardSummary,
+    })
+
+    if (dashboardQuery.isPending) {
+        return (
+            <div className="text-sm text-muted-foreground">
+                Loading dashboard...
+            </div>
+        )
+    }
+
+    if (dashboardQuery.isError) {
+        return (
+            <div className="text-sm text-destructive">
+                Failed to load dashboard.
+            </div>
+        )
+    }
+
     return (
         <div className="space-y-8">
             <div className="flex flex-col gap-2">
@@ -20,7 +46,9 @@ export function DashboardPage() {
                 </p>
             </div>
 
-            <DashboardStats />
+            <DashboardStats
+                data={dashboardQuery.data}
+            />
         </div>
     )
 }
