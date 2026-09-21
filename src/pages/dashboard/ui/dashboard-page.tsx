@@ -47,7 +47,14 @@ export function DashboardPage() {
             </div>
 
             <DashboardStats
-                data={dashboardQuery.data}
+                totalUsers={dashboardQuery.data.users.total}
+                activeUsers={dashboardQuery.data.users.active}
+                paidSubscriptions={dashboardQuery.data.subscriptions.paid}
+                liteSubscriptions={dashboardQuery.data.subscriptions.lite}
+                proSubscriptions={dashboardQuery.data.subscriptions.pro}
+                revenueRub={dashboardQuery.data.payments.revenueRub}
+                successfulPayments={dashboardQuery.data.payments.succeeded}
+                energyBalance={dashboardQuery.data.energy.totalBalance}
             />
         </div>
     )

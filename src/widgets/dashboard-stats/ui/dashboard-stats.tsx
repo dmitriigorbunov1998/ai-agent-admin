@@ -5,12 +5,20 @@ import {
     Zap,
 } from 'lucide-react';
 
-import type {DashboardSummary} from '@/pages/dashboard/model/types.ts';
-
-import {StatCard} from '@/widgets/dashboard-stats/ui/stat-card.tsx';
+import {StatCard} from '@/widgets/dashboard-stats/ui/stat-card';
 
 type DashboardStatsProps = {
-    data: DashboardSummary;
+    totalUsers: number,
+    activeUsers: number,
+
+    paidSubscriptions: number,
+    liteSubscriptions: number,
+    proSubscriptions: number,
+
+    revenueRub: number,
+    successfulPayments: number,
+
+    energyBalance: number,
 }
 
 const rubFormatter = new Intl.NumberFormat(
@@ -22,42 +30,39 @@ const rubFormatter = new Intl.NumberFormat(
     },
 )
 
-export function DashboardStats({data}: DashboardStatsProps) {
+export function DashboardStats({
+    totalUsers,
+    activeUsers,
+    paidSubscriptions,
+    liteSubscriptions,
+    proSubscriptions,
+    revenueRub,
+    successfulPayments,
+    energyBalance,
+}: DashboardStatsProps) {
     const stats = [
         {
             title: 'Total users',
-
-            value: data.users.total.toLocaleString(),
-
-            description: `${data.users.active.toLocaleString()} active users`,
-
+            value: totalUsers.toLocaleString(),
+            description: `${activeUsers.toLocaleString()} active users`,
             icon: Users,
         },
         {
             title: 'Paid subscriptions',
-
-            value: data.subscriptions.paid.toLocaleString(),
-
-            description: `${data.subscriptions.lite} Lite · ${data.subscriptions.pro} Pro`,
-
+            value: paidSubscriptions.toLocaleString(),
+            description: `${liteSubscriptions} Lite · ${proSubscriptions} Pro`,
             icon: WalletCards,
         },
         {
             title: 'Revenue',
-
-            value: rubFormatter.format(data.payments.revenueRub),
-
-            description: `${data.payments.succeeded.toLocaleString()} successful payments`,
-
+            value: rubFormatter.format(revenueRub),
+            description: `${successfulPayments.toLocaleString()} successful payments`,
             icon: CreditCard,
         },
         {
             title: 'Energy balance',
-
-            value: data.energy.totalBalance.toLocaleString(),
-
+            value: energyBalance.toLocaleString(),
             description: 'Available energy across users',
-
             icon: Zap,
         },
     ]
