@@ -1,4 +1,4 @@
 export {
     ApiError,
     apiClient,
-} from './api-client';
+} from './api-client.ts';
