@@ -5,13 +5,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 html {
-  background: #0a0a0a;
+  background: var(--background);
+  overscroll-behavior-y: none;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
+  background: var(--background);
 }
 
 button,
