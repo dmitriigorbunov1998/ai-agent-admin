@@ -1,9 +1,9 @@
 export type EnergyAccount = {
-    id: number
-    userId: number
+  id: number;
+  userId: number;
 
-    balance: number
-    monthlyLimit: number
+  balance: number;
+  monthlyLimit: number;
 
-    updatedAt: string
-}
+  updatedAt: string;
+};

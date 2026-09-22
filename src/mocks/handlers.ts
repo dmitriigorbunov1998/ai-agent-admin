@@ -1,18 +1,10 @@
-import {
-    HttpResponse,
-    http,
-} from 'msw';
+import { HttpResponse, http } from 'msw';
 
-import {dashboardSummaryMock} from '@/mocks/data/dashboard';
-import {usersMock} from '@/mocks/data/users';
+import { dashboardSummaryMock } from '@/mocks/data/dashboard';
+import { usersMock } from '@/mocks/data/users';
 
 export const handlers = [
-    http.get(
-        '/api/admin/dashboard',
-        () => {
-            return HttpResponse.json(
-                dashboardSummaryMock,
-            )
-        },
-    ),
-]
+  http.get('/api/admin/dashboard', () => {
+    return HttpResponse.json(dashboardSummaryMock);
+  }),
+];

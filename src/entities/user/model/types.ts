@@ -1,13 +1,13 @@
 export type User = {
-    id: number
+  id: number;
 
-    telegramId: string
+  telegramId: string;
 
-    username: string | null
-    firstName: string | null
+  username: string | null;
+  firstName: string | null;
 
-    isActive: boolean
+  isActive: boolean;
 
-    createdAt: string
-    updatedAt: string
-}
+  createdAt: string;
+  updatedAt: string;
+};

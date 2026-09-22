@@ -1,7 +1,5 @@
-import {setupWorker} from 'msw/browser'
+import { setupWorker } from 'msw/browser';
 
-import {handlers} from '@/mocks/handlers.ts';
+import { handlers } from '@/mocks/handlers.ts';
 
-export const worker = setupWorker(
-    ...handlers,
-);
+export const worker = setupWorker(...handlers);

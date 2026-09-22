@@ -1,40 +1,34 @@
-import {StrictMode} from 'react'
-import {createRoot} from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
-import {App} from '@/app/App'
+import { App } from '@/app/App';
 
-import './index.css'
+import './index.css';
 
 async function enableMocking() {
-    if (!import.meta.env.DEV) {
-        return
-    }
+  if (!import.meta.env.DEV) {
+    return;
+  }
 
-    if (
-        import.meta.env.VITE_ENABLE_MOCKS === 'false'
-    ) {
-        return
-    }
+  if (import.meta.env.VITE_ENABLE_MOCKS === 'false') {
+    return;
+  }
 
-    const { worker } = await import(
-        '@/mocks/browser'
-    )
+  const { worker } = await import('@/mocks/browser');
 
-    await worker.start({
-        onUnhandledRequest: 'bypass',
-    })
+  await worker.start({
+    onUnhandledRequest: 'bypass',
+  });
 }
 
 async function bootstrap() {
-    await enableMocking()
+  await enableMocking();
 
-    createRoot(
-        document.getElementById('root')!,
-    ).render(
-        <StrictMode>
-            <App />
-        </StrictMode>
-    )
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
 }
 
-bootstrap()
+bootstrap();

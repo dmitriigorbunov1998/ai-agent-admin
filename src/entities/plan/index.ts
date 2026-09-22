@@ -1,4 +1,1 @@
-export type {
-    Plan,
-    PlanCode,
-} from './model/types'
+export type { Plan, PlanCode } from './model/types';

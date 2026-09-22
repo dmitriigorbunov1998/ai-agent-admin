@@ -1,4 +1,1 @@
-export type {
-    Payment,
-    PaymentStatus,
-} from './model/types'
+export type { Payment, PaymentStatus } from './model/types';

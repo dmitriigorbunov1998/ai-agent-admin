@@ -1,41 +1,41 @@
-import type {PlanCode} from '@/entities/plan';
+import type { PlanCode } from '@/entities/plan';
 
 export type AdminUserListItem = {
-    id: number,
+  id: number;
 
-    telegramId: string,
+  telegramId: string;
 
-    username: string | null,
-    firstName: string | null,
+  username: string | null;
+  firstName: string | null;
 
-    isActive: boolean,
+  isActive: boolean;
 
-    createdAt: string,
-    subscription: {
-        planCode: PlanCode,
-        planName: string,
-    } | null,
+  createdAt: string;
+  subscription: {
+    planCode: PlanCode;
+    planName: string;
+  } | null;
 
-    energy: {
-        balance: number,
-        monthlyLimit: number,
-    } | null,
-}
+  energy: {
+    balance: number;
+    monthlyLimit: number;
+  } | null;
+};
 
 export type AdminUsersResponse = {
-    items: AdminUserListItem[],
+  items: AdminUserListItem[];
 
-    pagination: {
-        page: number,
-        pageSize: number,
+  pagination: {
+    page: number;
+    pageSize: number;
 
-        total: number,
-        totalPages: number,
-    }
-}
+    total: number;
+    totalPages: number;
+  };
+};
 
 export type GetAdminUsersParams = {
-    page: number,
-    pageSize: number,
-    search?: string,
-}
+  page: number;
+  pageSize: number;
+  search?: string;
+};

@@ -1,16 +1,14 @@
-export type SubscriptionStatus =
-    | 'active'
-    | 'expired'
+export type SubscriptionStatus = 'active' | 'expired';
 
 export type Subscription = {
-    id: number
+  id: number;
 
-    userId: number
-    planId: number
+  userId: number;
+  planId: number;
 
-    status: SubscriptionStatus
+  status: SubscriptionStatus;
 
-    startedAt: string
-    expiresAt: string
-    createdAt: string
-}
+  startedAt: string;
+  expiresAt: string;
+  createdAt: string;
+};

@@ -1,4 +1,1 @@
-export type {
-    Subscription,
-    SubscriptionStatus,
-} from './model/types'
+export type { Subscription, SubscriptionStatus } from './model/types';

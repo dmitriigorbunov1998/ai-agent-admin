@@ -1,19 +1,16 @@
-export type PlanCode =
-    | 'freemium'
-    | 'lite'
-    | 'pro'
+export type PlanCode = 'freemium' | 'lite' | 'pro';
 
 export type Plan = {
-    id: number
+  id: number;
 
-    code: PlanCode
-    name: string
+  code: PlanCode;
+  name: string;
 
-    priceRub: number
-    energyLimit: number
+  priceRub: number;
+  energyLimit: number;
 
-    maxConcurrentTasks: number
-    maxCronJobs: number
+  maxConcurrentTasks: number;
+  maxCronJobs: number;
 
-    isActive: boolean
-}
+  isActive: boolean;
+};

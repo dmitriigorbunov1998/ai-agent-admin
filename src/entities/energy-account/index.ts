@@ -1,3 +1,1 @@
-export type {
-    EnergyAccount,
-} from './model/types'
+export type { EnergyAccount } from './model/types';

@@ -1,20 +1,18 @@
-export type PaymentStatus =
-    | 'pending'
-    | 'succeeded'
+export type PaymentStatus = 'pending' | 'succeeded';
 
 export type Payment = {
-    id: number
+  id: number;
 
-    userId: number
-    planId: number | null
+  userId: number;
+  planId: number | null;
 
-    provider: string
-    providerPaymentId: string | null
+  provider: string;
+  providerPaymentId: string | null;
 
-    amountRub: number
+  amountRub: number;
 
-    status: PaymentStatus
+  status: PaymentStatus;
 
-    createdAt: string
-    paidAt: string | null
-}
+  createdAt: string;
+  paidAt: string | null;
+};
