@@ -1,6 +1,6 @@
 import type {PlanCode} from '@/entities/plan';
 
-export type AdminListItem = {
+export type AdminUserListItem = {
     id: number,
 
     telegramId: string,
@@ -23,7 +23,7 @@ export type AdminListItem = {
 }
 
 export type AdminUsersResponse = {
-    items: AdminListItem[],
+    items: AdminUserListItem[],
 
     pagination: {
         page: number,
