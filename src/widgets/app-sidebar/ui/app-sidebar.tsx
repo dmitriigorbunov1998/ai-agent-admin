@@ -19,7 +19,7 @@ import { navigation } from '@/shared/config/navigation';
 export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="h-16 border-b">
+      <SidebarHeader className="h-16 justify-center border-b">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
@@ -27,7 +27,7 @@ export function AppSidebar() {
               tooltip="Clio Admin"
               className="cursor-default"
             >
-              <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground group-data-[collapsible=icon]:translate-x-1">
                 <Bot className="size-4" />
               </div>
 
