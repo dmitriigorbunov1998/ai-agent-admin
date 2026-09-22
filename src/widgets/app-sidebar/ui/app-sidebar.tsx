@@ -19,7 +19,7 @@ import { navigation } from '@/shared/config/navigation';
 export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b">
+      <SidebarHeader className="h-16 border-b">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
