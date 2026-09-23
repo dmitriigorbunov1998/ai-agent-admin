@@ -50,14 +50,9 @@ export const usersMock: AdminUserListItem[] = Array.from(
       subscription: plan,
 
       energy: {
-        balance:
-          plan.planCode === 'pro'
-            ? 78 - (index % 20)
-            : plan.planCode === 'lite'
-              ? 31 - (index % 12)
-              : Math.max(0, 5 - (index % 6)),
-
-        monthlyLimit: 100,
+        balance,
+        reserved,
+        available: balance - reserved,
       },
     };
   },
