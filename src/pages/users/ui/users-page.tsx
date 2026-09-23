@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { getAdminUsers } from '@/pages/users/api/get-admin-users';
 import { usersQueryKeys } from '@/pages/users/model/query-keys';
 import { UsersTable } from '@/pages/users/ui/users-table';
+import { GrantEnergyDialog } from '@/features/grant-energy/ui/grant-energy-dialog';
 
 const PAGE_SIZE = 10;
 
@@ -78,7 +79,7 @@ export function UsersPage() {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <div className="flex size-9 items-center justify-center rounded-lg border bg-muted">
             <Users className="size-4" />
@@ -92,6 +93,8 @@ export function UsersPage() {
             </p>
           </div>
         </div>
+
+        <GrantEnergyDialog />
       </div>
 
       <form onSubmit={handleSearch} className="flex max-w-md gap-2">

@@ -115,7 +115,7 @@ export function GrantEnergyDialog({
               <BatteryCharging className="size-5" />
             </div>
 
-            <DialogTItle>Add Energy</DialogTItle>
+            <DialogTitle>Add Energy</DialogTitle>
 
             <DialogDescription>
               Manually add Energy to a Clio user using their Telegram ID.
