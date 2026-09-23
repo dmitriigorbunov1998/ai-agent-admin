@@ -84,7 +84,21 @@ export const UsersTable = ({ users }: UsersTableProps) => {
                 </Badge>
               </TableCell>
 
-              <TableCell>{user.energy?.balance ?? '-'}</TableCell>
+              <TableCell>
+                {user.energy ? (
+                  <div className="flex flex-col">
+                    <span className="font-medium">{user.energy.available}</span>
+
+                    {user.energy.reserved > 0 && (
+                      <span className="text-xs text-muted-foreground">
+                        {user.energy.reserved} reserved
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  '-'
+                )}
+              </TableCell>
 
               <TableCell>
                 <Badge variant={user.isActive ? 'secondary' : 'outline'}>
