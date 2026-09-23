@@ -34,6 +34,20 @@ export const usersMock: AdminUserListItem[] = Array.from(
               planName: 'Freemium',
             };
 
+    const balance = plan.planCode === 'pro'
+      ? 78 - (index % 20)
+      : plan.planCode === 'lite'
+        ? 31 - (index % 12)
+        : Math.max(
+          0,
+          5 - (index % 6),
+        )
+
+    const reserved =
+      index % 5 === 0
+        ? Math.min(2, balance)
+        : 0
+
     return {
       id,
 
