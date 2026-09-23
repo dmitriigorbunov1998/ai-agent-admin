@@ -1,4 +1,4 @@
-import type { GetAdminUsersParams } from '@/pages/users/model/types.ts';
+import type { GetAdminUsersParams } from '@/pages/users/model/types';
 
 export const usersQueryKeys = {
   all: ['admin-users'] as const,

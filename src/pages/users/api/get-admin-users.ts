@@ -3,7 +3,7 @@ import { apiClient } from '@/shared/api';
 import type {
   AdminUsersResponse,
   GetAdminUsersParams,
-} from '@/pages/users/model/types.ts';
+} from '@/pages/users/model/types';
 
 export function getAdminUsers({ page, pageSize, search }: GetAdminUsersParams) {
   const searchParams = new URLSearchParams({
