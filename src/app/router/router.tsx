@@ -7,6 +7,7 @@ import { PaymentsPage } from '@/pages/payments/ui/payments-page';
 import { SubscriptionsPage } from '@/pages/subscriptions/ui/subscriptions-page';
 import { SystemPage } from '@/pages/system/ui/system-page';
 import { UsersPage } from '@/pages/users/ui/users-page';
+import { UserDetailsPage } from '@/pages/user-details/ui/user-details-page';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: 'users',
         element: <UsersPage />,
+      },
+      {
+        path: 'users/:userId',
+        element: <UserDetailsPage />,
       },
       {
         path: 'subscriptions',
