@@ -19,6 +19,7 @@ export type AdminUserListItem = {
   energy: {
     balance: number;
     monthlyLimit: number;
+    available: number;
   } | null;
 };
 
