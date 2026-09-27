@@ -62,13 +62,14 @@ export function GrantEnergyDialog({
       });
 
       setAmount('');
-      setAmount('');
+      setReason('');
       setOpen(false);
     },
 
     onError: (error) => {
       toast.error('Failed to add Energy', {
-        description: message,
+        description:
+          error instanceof Error ? error.message : 'An unexpected error occurred',
       });
     },
   });
@@ -111,7 +112,7 @@ export function GrantEnergyDialog({
       <DialogContent>
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <div className="flex size=10 items-center justify-center rounded-lg border bg-muted">
+            <div className="flex size-10 items-center justify-center rounded-lg border bg-muted">
               <BatteryCharging className="size-5" />
             </div>
 

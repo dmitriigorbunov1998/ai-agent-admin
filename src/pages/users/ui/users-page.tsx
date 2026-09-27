@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { Search, Users } from 'lucide-react';
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -31,12 +31,6 @@ export function UsersPage() {
 
   const search = searchParams.get('search') ?? '';
 
-  const [searchValue, setSearchValue] = useState(search);
-
-  useEffect(() => {
-    setSearchValue(search);
-  }, [search]);
-
   const params = {
     page,
     pageSize: PAGE_SIZE,
@@ -56,7 +50,9 @@ export function UsersPage() {
 
     const nextParams = new URLSearchParams(searchParams);
 
-    const normalizedSearch = searchValue.trim();
+    const formData = new FormData(event.currentTarget);
+
+    const normalizedSearch = String(formData.get('search') ?? '').trim();
 
     if (normalizedSearch) {
       nextParams.set('search', normalizedSearch);
@@ -97,13 +93,17 @@ export function UsersPage() {
         <GrantEnergyDialog />
       </div>
 
-      <form onSubmit={handleSearch} className="flex max-w-md gap-2">
+      <form
+        key={search}
+        onSubmit={handleSearch}
+        className="flex max-w-md gap-2"
+      >
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
 
           <Input
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
+            name="search"
+            defaultValue={search}
             placeholder="Name, username or Telegram ID"
             className="pl-9"
           />
