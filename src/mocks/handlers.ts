@@ -2,6 +2,7 @@ import { HttpResponse, http } from 'msw';
 
 import { dashboardSummaryMock } from '@/mocks/data/dashboard';
 import { usersMock } from '@/mocks/data/users';
+import { createUserDetailsMock } from '@/mocks/data/user-detais';
 
 export const handlers = [
   http.get('/api/admin/dashboard', () => {
@@ -50,6 +51,35 @@ export const handlers = [
       },
     });
   }),
+
+  http.get(
+    '/api/admin/users/:userId',
+
+    ({ params }) => {
+      const userId = Number(params.userId);
+
+      const user = usersMock.find(
+        (item) => item.id === userId,
+      )
+
+      if (!user) {
+        return HttpResponse.json(
+          {
+            error: 'USER_NOT_FOUND',
+          },
+          {
+            status: 404,
+          },
+        )
+      }
+
+      return HttpResponse.json(
+        createUserDetailsMock(
+          user,
+        ),
+      )
+    },
+  ),
 
   http.post(
     '/api/admin/users/:telegramId/energy/grants',
