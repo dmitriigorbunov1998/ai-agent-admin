@@ -28,10 +28,12 @@ import { grantEnergy } from '@/features/grant-energy/api/grant-energy';
 
 type GrantEnergyDialogProps = {
   defaultTelegramId?: string;
+  lockTelegramId?: boolean;
 };
 
 export function GrantEnergyDialog({
   defaultTelegramId = '',
+  lockTelegramId = false,
 }: GrantEnergyDialogProps) {
   const queryClient = useQueryClient();
 
@@ -133,7 +135,7 @@ export function GrantEnergyDialog({
                 autoComplete="off"
                 placeholder="700000001"
                 value={telegramId}
-                disabled={mutation.isPending}
+                disabled={mutation.isPending || lockTelegramId}
                 onChange={(event) => setTelegramId(event.target.value)}
               />
 
