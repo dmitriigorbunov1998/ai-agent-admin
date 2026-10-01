@@ -16,7 +16,8 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
 });
 
 export function UserAiActivityCard({ activity }: UserAiActivityCardProps) {
-  const spent = Number(activity.reservedUsd);
+  const spent = Number(activity.spentUsd);
+  const reserved = Number(activity.reservedUsd);
 
   return (
     <Card>

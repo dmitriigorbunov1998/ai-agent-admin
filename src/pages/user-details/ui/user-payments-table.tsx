@@ -20,7 +20,7 @@ const rubFormatter = new Intl.NumberFormat('ru-RU', {
   maximumFractionDigits: 0,
 });
 
-const dateFormatter = new Intl.NumberFormat('en-GB', {
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
   dateStyle: 'medium',
   timeStyle: 'short',
 });
