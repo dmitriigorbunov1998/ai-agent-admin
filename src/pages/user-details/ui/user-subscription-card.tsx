@@ -1,28 +1,17 @@
-import {
-  Clock,
-  Crown,
-  Tiwer,
-} from 'lucide-react';
+import { Clock, Crown, Timer } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import type { AdminUserDetails } from '@/pages/user-details/model/types';
 
 type UserSubscriptionCardProps = {
   subscription: AdminUserDetails['subscription'];
-}
+};
 
-const dateFormatter = new Intl.DateTimeFormat('en-GB',
-  {
-    dateStyle: 'medium',
-  },
-)
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  dateStyle: 'medium',
+});
 
 export function UserSubscriptionCard({
   subscription,
@@ -62,14 +51,10 @@ export function UserSubscriptionCard({
               </div>
 
               <div>
-                <p className="text-xs text-muted-foreground">
-                  Energy
-                </p>
+                <p className="text-xs text-muted-foreground">Energy</p>
 
                 <p className="mt-1 font-medium">
-                  {
-                    subscription.plan.energyLimit
-                  }
+                  {subscription.plan.energyLimit}
                 </p>
               </div>
 
@@ -80,21 +65,15 @@ export function UserSubscriptionCard({
                 </p>
 
                 <p className="mt-1 font-medium">
-                  {
-                    subscription.plan.maxConcurrentTasks
-                  }
+                  {subscription.plan.maxConcurrentTasks}
                 </p>
               </div>
 
               <div>
-                <p className="text-xs text-muted-foreground">
-                  Cron jobs
-                </p>
+                <p className="text-xs text-muted-foreground">Cron jobs</p>
 
                 <p className="mt-1 font-medium">
-                  {
-                    subscription.plan.maxCronJobs
-                  }
+                  {subscription.plan.maxCronJobs}
                 </p>
               </div>
             </div>
