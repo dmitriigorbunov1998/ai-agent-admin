@@ -15,7 +15,7 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 6,
 });
 
-export function UserAuActivityCard({ activity }: UserAiActivityCardProps) {
+export function UserAiActivityCard({ activity }: UserAiActivityCardProps) {
   const spent = Number(activity.reservedUsd);
 
   return (
