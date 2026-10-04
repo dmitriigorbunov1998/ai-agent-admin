@@ -5,15 +5,16 @@ import type {
   GetAdminUsersParams,
 } from '@/pages/users/model/types';
 
-export function getAdminUsers({ page, pageSize, search }: GetAdminUsersParams) {
-  const searchParams = new URLSearchParams({
-    page: String(page),
-    pageSize: String(pageSize),
-  });
+export function getAdminUsers({ page, pageSize }: GetAdminUsersParams) {
+  const limit = pageSize;
 
-  if (search) {
-    searchParams.set('search', search);
-  }
+  const offset = (page - 1) * pageSize;
+
+  const searchParams = new URLSearchParams({
+    limit: String(limit),
+
+    offset: String(offset),
+  });
 
   return apiClient<AdminUsersResponse>(
     `/api/admin/users?${searchParams.toString()}`,
