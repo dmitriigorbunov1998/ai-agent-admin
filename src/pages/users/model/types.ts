@@ -4,39 +4,27 @@ export type AdminUserListItem = {
   id: number;
 
   telegramId: string;
-
   username: string | null;
-  firstName: string | null;
 
-  isActive: boolean;
+  plan: {
+    code: PlanCode;
+    name: string;
+  };
 
-  createdAt: string;
-  subscription: {
-    planCode: PlanCode;
-    planName: string;
-  } | null;
+  energy: number | null;
 
-  energy: {
-    balance: number;
-    reserved: number;
-    available: number;
-  } | null;
+  subscriptionExpiresAt: string | null;
 };
 
 export type AdminUsersResponse = {
-  items: AdminUserListItem[];
+  users: AdminUserListItem[];
 
-  pagination: {
-    page: number;
-    pageSize: number;
-
-    total: number;
-    totalPages: number;
-  };
+  limit: number;
+  offset: number;
+  total: number;
 };
 
 export type GetAdminUsersParams = {
   page: number;
   pageSize: number;
-  search?: string;
 };
