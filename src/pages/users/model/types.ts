@@ -13,7 +13,7 @@ export type AdminUserListItem = {
 
   energy: number | null;
 
-  subscriptionExpiresAt: string | null;
+  createdAt: string | null;
 };
 
 export type AdminUsersResponse = {

@@ -1,4 +1,5 @@
-import { ArrowRight, CircleOff } from 'lucide-react';
+import { ArrowRight, CircleOff, Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/badge';
@@ -30,7 +31,6 @@ export const UsersTable = ({ users }: UsersTableProps) => {
         <CircleOff className="mb-3 size-5 text-muted-foreground" />
 
         <p className="text-sm font-medium">No users found</p>
-
       </div>
     );
   }
@@ -43,8 +43,8 @@ export const UsersTable = ({ users }: UsersTableProps) => {
             <TableHead>User</TableHead>
             <TableHead>Telegram ID</TableHead>
             <TableHead>Plan</TableHead>
-            <TableHead>Energy</TableHead>
-            <TableHead>Subscription</TableHead>
+            <TableHead className="w-40">Energy</TableHead>
+            <TableHead>Created</TableHead>
 
             <TableHead className="w-12" />
           </TableRow>
@@ -55,12 +55,18 @@ export const UsersTable = ({ users }: UsersTableProps) => {
             <TableRow key={user.id}>
               <TableCell>
                 <div className="flex flex-col">
-                  <Link
-                    to={`/users/${user.id}`}
-                    className="font-medium hover:underline"
-                  >
-                    {user.username ? `@${user.username}` : `user #${user.id}`}
-                  </Link>
+                  {user.username ? (
+                    <a
+                      href={`https://t.me/${user.username}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium hover:underline"
+                    >
+                      @{user.username}
+                    </a>
+                  ) : (
+                    <span className="font-medium">User #{user.id}</span>
+                  )}
                 </div>
               </TableCell>
 
@@ -73,21 +79,31 @@ export const UsersTable = ({ users }: UsersTableProps) => {
               </TableCell>
 
               <TableCell>
-                {user.energy ?? '-'}
+                <div className="flex items-center gap-2">
+                  <span className="min-w-12 font-medium">
+                    {user.energy ?? '-'}
+                  </span>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    disabled
+                    aria-label={`Add energy to user ${user.id}`}
+                    title="Energy management is not available yet"
+                    className="size-7 shrink-0"
+                  >
+                    <Plus className="size-3.5" />
+                  </Button>
+                </div>
               </TableCell>
 
               <TableCell>
-                {user.subscriptionExpiresAt ? (
-                  <span className="text-muted-foreground">
-                    {dateFormatter.format(
-                      new Date(user.subscriptionExpiresAt)
-                    )}
-                  </span>
-                ) : (
-                  <span className="text-muted-foreground">
-                    -
-                  </span>
-                )}
+                <span className="text-muted-foreground">
+                  {user.createdAt
+                    ? dateFormatter.format(new Date(user.createdAt))
+                    : '-'}
+                </span>
               </TableCell>
 
               <TableCell>

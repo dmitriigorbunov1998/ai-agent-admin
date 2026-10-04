@@ -8,7 +8,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { getAdminUsers } from '@/pages/users/api/get-admin-users';
 import { usersQueryKeys } from '@/pages/users/model/query-keys';
 import { UsersTable } from '@/pages/users/ui/users-table';
-import { GrantEnergyDialog } from '@/features/grant-energy/ui/grant-energy-dialog';
 
 const PAGE_SIZE = 10;
 
@@ -66,8 +65,6 @@ export function UsersPage() {
             </p>
           </div>
         </div>
-
-        <GrantEnergyDialog />
       </div>
 
       {usersQuery.isPending ? (
@@ -110,10 +107,7 @@ export function UsersPage() {
               <Button
                 variant="outline"
                 size="sm"
-                disabled={
-                  page >= totalPages ||
-                  usersQuery.isPlaceholderData
-                }
+                disabled={page >= totalPages || usersQuery.isPlaceholderData}
                 onClick={() => changePage(page + 1)}
               >
                 Next
