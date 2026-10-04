@@ -25,6 +25,6 @@ export type AdminUsersResponse = {
 };
 
 export type GetAdminUsersParams = {
-  page: number;
-  pageSize: number;
+  limit: number;
+  offset: number;
 };

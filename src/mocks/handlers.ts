@@ -12,74 +12,44 @@ export const handlers = [
   http.get('/api/admin/users', ({ request }) => {
     const url = new URL(request.url);
 
-    const requestedPage = Number(url.searchParams.get('page') ?? 1);
+    const requestedLimit = Number(url.searchParams.get('limit') ?? 10);
 
-    const requestedPageSize = Number(url.searchParams.get('pageSize') ?? 10);
+    const requestedOffset = Number(url.searchParams.get('offset') ?? 0);
 
-    const page = Math.max(1, requestedPage);
+    const limit = Math.min(100, Math.max(1, requestedLimit));
 
-    const pageSize = Math.min(100, Math.max(1, requestedPageSize));
+    const offset = Math.max(0, requestedOffset);
 
-    const search = (url.searchParams.get('search') ?? '').trim().toLowerCase();
+    const total = usersMock.length;
 
-    const filteredUsers = usersMock.filter((user) => {
-      if (!search) {
-        return true;
-      }
-
-      return [user.telegramId, user.username, user.firstName].some((value) =>
-        value?.toLowerCase().includes(search),
-      );
-    });
-
-    const total = filteredUsers.length;
-
-    const totalPages = Math.ceil(total / pageSize);
-
-    const start = (page - 1) * pageSize;
-
-    const items = filteredUsers.slice(start, start + pageSize);
+    const users = usersMock.slice(offset, offset + limit);
 
     return HttpResponse.json({
-      items,
-
-      pagination: {
-        page,
-        pageSize,
-        total,
-        totalPages,
-      },
+      users,
+      limit,
+      offset,
+      total,
     });
   }),
 
-  http.get(
-    '/api/admin/users/:userId',
+  http.get('/api/admin/users/:userId', ({ params }) => {
+    const userId = Number(params.userId);
 
-    ({ params }) => {
-      const userId = Number(params.userId);
+    const user = usersMock.find((item) => item.id === userId);
 
-      const user = usersMock.find(
-        (item) => item.id === userId,
-      )
-
-      if (!user) {
-        return HttpResponse.json(
-          {
-            error: 'USER_NOT_FOUND',
-          },
-          {
-            status: 404,
-          },
-        )
-      }
-
+    if (!user) {
       return HttpResponse.json(
-        createUserDetailsMock(
-          user,
-        ),
-      )
-    },
-  ),
+        {
+          error: 'USER_NOT_FOUND',
+        },
+        {
+          status: 404,
+        },
+      );
+    }
+
+    return HttpResponse.json(createUserDetailsMock(user));
+  }),
 
   http.post(
     '/api/admin/users/:telegramId/energy/grants',
@@ -118,7 +88,7 @@ export const handlers = [
         );
       }
 
-      if (!user.energy) {
+      if (user.energy === null) {
         return HttpResponse.json(
           {
             error: 'ENERGY_ACCOUNT_NOT_FOUND',
@@ -129,11 +99,9 @@ export const handlers = [
         );
       }
 
-      const balanceBefore = user.energy.balance;
+      const balanceBefore = user.energy;
 
-      user.energy.balance += amount;
-
-      user.energy.available = user.energy.balance - user.energy.reserved;
+      user.energy += amount;
 
       return HttpResponse.json({
         user: {
@@ -142,8 +110,6 @@ export const handlers = [
           telegramId: user.telegramId,
 
           username: user.username,
-
-          firstName: user.firstName,
         },
 
         energy: {
@@ -151,11 +117,9 @@ export const handlers = [
 
           balanceBefore,
 
-          balanceAfter: user.energy.balance,
+          balanceAfter: user.energy,
 
-          reserved: user.energy.reserved,
-
-          availableAfter: user.energy.available,
+          availableAfter: user.energy,
         },
       });
     },

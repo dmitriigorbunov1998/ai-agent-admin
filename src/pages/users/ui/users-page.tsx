@@ -1,10 +1,8 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { Search, Users } from 'lucide-react';
-import { type FormEvent } from 'react';
+import { Users } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { getAdminUsers } from '@/pages/users/api/get-admin-users';
@@ -29,41 +27,16 @@ export function UsersPage() {
 
   const page = parsePage(searchParams.get('page'));
 
-  const search = searchParams.get('search') ?? '';
-
   const params = {
-    page,
-    pageSize: PAGE_SIZE,
-    search: search || undefined,
+    limit: PAGE_SIZE,
+    offset: (page - 1) * PAGE_SIZE,
   };
 
   const usersQuery = useQuery({
     queryKey: usersQueryKeys.list(params),
-
     queryFn: () => getAdminUsers(params),
-
     placeholderData: keepPreviousData,
   });
-
-  function handleSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const nextParams = new URLSearchParams(searchParams);
-
-    const formData = new FormData(event.currentTarget);
-
-    const normalizedSearch = String(formData.get('search') ?? '').trim();
-
-    if (normalizedSearch) {
-      nextParams.set('search', normalizedSearch);
-    } else {
-      nextParams.delete('search');
-    }
-
-    nextParams.set('page', '1');
-
-    setSearchParams(nextParams);
-  }
 
   function changePage(nextPage: number) {
     const nextParams = new URLSearchParams(searchParams);
@@ -72,6 +45,10 @@ export function UsersPage() {
 
     setSearchParams(nextParams);
   }
+
+  const totalPages = usersQuery.data
+    ? Math.max(Math.ceil(usersQuery.data.total / usersQuery.data.limit), 1)
+    : 1;
 
   return (
     <div className="space-y-6">
@@ -93,25 +70,6 @@ export function UsersPage() {
         <GrantEnergyDialog />
       </div>
 
-      <form
-        key={search}
-        onSubmit={handleSearch}
-        className="flex max-w-md gap-2"
-      >
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-
-          <Input
-            name="search"
-            defaultValue={search}
-            placeholder="Name, username or Telegram ID"
-            className="pl-9"
-          />
-        </div>
-
-        <Button type="submit">Search</Button>
-      </form>
-
       {usersQuery.isPending ? (
         <div className="space-y-2">
           <Skeleton className="h-12 w-full" />
@@ -128,11 +86,11 @@ export function UsersPage() {
         </div>
       ) : (
         <>
-          <UsersTable users={usersQuery.data.items} />
+          <UsersTable users={usersQuery.data.users} />
 
           <div className="flex items-center justify-between">
             <p className="text-sm text-muted-foreground">
-              {usersQuery.data.pagination.total} users
+              {usersQuery.data.total} users
             </p>
 
             <div className="flex items-center gap-3">
@@ -146,15 +104,14 @@ export function UsersPage() {
               </Button>
 
               <span className="min-w-24 text-center text-sm text-muted-foreground">
-                Page {page} of{' '}
-                {Math.max(usersQuery.data.pagination.totalPages, 1)}
+                Page {page} of {totalPages}
               </span>
 
               <Button
                 variant="outline"
                 size="sm"
                 disabled={
-                  page >= usersQuery.data.pagination.totalPages ||
+                  page >= totalPages ||
                   usersQuery.isPlaceholderData
                 }
                 onClick={() => changePage(page + 1)}

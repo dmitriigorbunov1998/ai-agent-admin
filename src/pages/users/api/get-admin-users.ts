@@ -5,11 +5,7 @@ import type {
   GetAdminUsersParams,
 } from '@/pages/users/model/types';
 
-export function getAdminUsers({ page, pageSize }: GetAdminUsersParams) {
-  const limit = pageSize;
-
-  const offset = (page - 1) * pageSize;
-
+export function getAdminUsers({ limit, offset }: GetAdminUsersParams) {
   const searchParams = new URLSearchParams({
     limit: String(limit),
 

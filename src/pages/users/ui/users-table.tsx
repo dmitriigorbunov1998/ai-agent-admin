@@ -31,9 +31,6 @@ export const UsersTable = ({ users }: UsersTableProps) => {
 
         <p className="text-sm font-medium">No users found</p>
 
-        <p className="mt-1 text-xs text-muted-foreground">
-          Try changing your search.
-        </p>
       </div>
     );
   }
@@ -47,8 +44,7 @@ export const UsersTable = ({ users }: UsersTableProps) => {
             <TableHead>Telegram ID</TableHead>
             <TableHead>Plan</TableHead>
             <TableHead>Energy</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Registered</TableHead>
+            <TableHead>Subscription</TableHead>
 
             <TableHead className="w-12" />
           </TableRow>
@@ -63,14 +59,8 @@ export const UsersTable = ({ users }: UsersTableProps) => {
                     to={`/users/${user.id}`}
                     className="font-medium hover:underline"
                   >
-                    {user.firstName ?? `User #${user.id}`}
+                    {user.username ? `@${user.username}` : `user #${user.id}`}
                   </Link>
-
-                  {user.username && (
-                    <span className="text-xs text-muted-foreground">
-                      @{user.username}
-                    </span>
-                  )}
                 </div>
               </TableCell>
 
@@ -79,35 +69,25 @@ export const UsersTable = ({ users }: UsersTableProps) => {
               </TableCell>
 
               <TableCell>
-                <Badge variant="outline">
-                  {user.subscription?.planName ?? 'No plan'}
-                </Badge>
+                <Badge variant="outline">{user.plan?.name ?? 'No plan'}</Badge>
               </TableCell>
 
               <TableCell>
-                {user.energy ? (
-                  <div className="flex flex-col">
-                    <span className="font-medium">{user.energy.available}</span>
+                {user.energy ?? '-'}
+              </TableCell>
 
-                    {user.energy.reserved > 0 && (
-                      <span className="text-xs text-muted-foreground">
-                        {user.energy.reserved} reserved
-                      </span>
+              <TableCell>
+                {user.subscriptionExpiresAt ? (
+                  <span className="text-muted-foreground">
+                    {dateFormatter.format(
+                      new Date(user.subscriptionExpiresAt)
                     )}
-                  </div>
+                  </span>
                 ) : (
-                  '-'
+                  <span className="text-muted-foreground">
+                    -
+                  </span>
                 )}
-              </TableCell>
-
-              <TableCell>
-                <Badge variant={user.isActive ? 'secondary' : 'outline'}>
-                  {user.isActive ? 'Active' : 'Inactive'}
-                </Badge>
-              </TableCell>
-
-              <TableCell className="text-muted-foreground">
-                {dateFormatter.format(new Date(user.createdAt))}
               </TableCell>
 
               <TableCell>

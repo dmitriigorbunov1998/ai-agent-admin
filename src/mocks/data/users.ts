@@ -1,18 +1,5 @@
 import type { AdminUserListItem } from '@/pages/users/model/types';
 
-const names = [
-  'Alex',
-  'Maria',
-  'Dmitrii',
-  'Anna',
-  'Nikita',
-  'Elena',
-  'Maxim',
-  'Sofia',
-  'Ivan',
-  'Victoria',
-];
-
 export const usersMock: AdminUserListItem[] = Array.from(
   { length: 37 },
   (_, index) => {
@@ -21,32 +8,34 @@ export const usersMock: AdminUserListItem[] = Array.from(
     const plan =
       index % 10 === 0
         ? {
-            planCode: 'pro' as const,
-            planName: 'Pro',
+            code: 'pro' as const,
+            name: 'Pro',
           }
         : index % 4 === 0
           ? {
-              planCode: 'lite' as const,
-              planName: 'Lite',
+              code: 'lite' as const,
+              name: 'Lite',
             }
           : {
-              planCode: 'freemium' as const,
-              planName: 'Freemium',
+              code: 'freemium' as const,
+              name: 'Freemium',
             };
 
-    const balance = plan.planCode === 'pro'
+    const energy = plan.code === 'pro'
       ? 78 - (index % 20)
-      : plan.planCode === 'lite'
+      : plan.code === 'lite'
         ? 31 - (index % 12)
         : Math.max(
           0,
           5 - (index % 6),
         )
 
-    const reserved =
-      index % 5 === 0
-        ? Math.min(2, balance)
-        : 0
+    const subscriptionExpiresAt =
+      plan.code === 'freemium'
+        ? null
+        : new Date(
+          Date.now() + 1000 * 60 * 60 * 24 * 30,
+        ).toISOString();
 
     return {
       id,
@@ -55,19 +44,11 @@ export const usersMock: AdminUserListItem[] = Array.from(
 
       username: `clio_user_${id}`,
 
-      firstName: names[index % names.length],
+      plan,
 
-      isActive: index % 13 !== 0,
+      energy,
 
-      createdAt: new Date(Date.UTC(2026, 7, 10 + index)).toISOString(),
-
-      subscription: plan,
-
-      energy: {
-        balance,
-        reserved,
-        available: balance - reserved,
-      },
+      subscriptionExpiresAt,
     };
   },
 );
