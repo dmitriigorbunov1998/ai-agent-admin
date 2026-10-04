@@ -12,4 +12,14 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+
+  server: {
+    proxy: {
+      '/api/admin': {
+        target: 'http://127.0.0.1:3101',
+
+        changeOrigin: true,
+      },
+    },
+  },
 });
