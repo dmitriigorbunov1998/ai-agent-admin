@@ -107,13 +107,13 @@ export const UsersTable = ({ users }: UsersTableProps) => {
               </TableCell>
 
               <TableCell>
-                <Link
-                  to={`/users/${user.id}`}
-                  className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                  aria-label={`Open user ${user.id}`}
-                >
-                  <ArrowRight className="size-4" />
-                </Link>
+                {/*<Link*/}
+                {/*  to={`/users/${user.id}`}*/}
+                {/*  className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"*/}
+                {/*  aria-label={`Open user ${user.id}`}*/}
+                {/*>*/}
+                <ArrowRight className="size-4" />
+                {/*</Link>*/}
               </TableCell>
             </TableRow>
           ))}
