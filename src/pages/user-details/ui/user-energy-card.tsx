@@ -37,9 +37,7 @@ export function UserEnergyCard({ telegramId, energy }: UserEnergyCardProps) {
                 Balance
               </p>
 
-              <p className="mt-2 text-2xl font-semibold">
-                {energy.balance}
-              </p>
+              <p className="mt-2 text-2xl font-semibold">{energy.balance}</p>
             </div>
 
             <div>
@@ -48,9 +46,7 @@ export function UserEnergyCard({ telegramId, energy }: UserEnergyCardProps) {
                 Reserved
               </p>
 
-              <p className="mt-2 text-2xl font-semibold">
-                {energy.reserved}
-              </p>
+              <p className="mt-2 text-2xl font-semibold">{energy.reserved}</p>
             </div>
 
             <div>
@@ -59,9 +55,7 @@ export function UserEnergyCard({ telegramId, energy }: UserEnergyCardProps) {
                 Available
               </p>
 
-              <p className="mt-2 text-2xl font-semibold">
-                {energy.available}
-              </p>
+              <p className="mt-2 text-2xl font-semibold">{energy.available}</p>
             </div>
           </div>
         )}

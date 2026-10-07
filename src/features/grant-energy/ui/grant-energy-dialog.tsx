@@ -71,7 +71,9 @@ export function GrantEnergyDialog({
     onError: (error) => {
       toast.error('Failed to add Energy', {
         description:
-          error instanceof Error ? error.message : 'An unexpected error occurred',
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred',
       });
     },
   });

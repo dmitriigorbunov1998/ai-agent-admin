@@ -15,7 +15,7 @@ export type AdminUserDetails = {
 
     createdAt: string;
     updatedAt: string;
-  }
+  };
 
   subscription: {
     id: number;
@@ -31,11 +31,11 @@ export type AdminUserDetails = {
       name: string;
 
       priceRub: number;
-      energyLimit: number
+      energyLimit: number;
 
       maxConcurrentTasks: number;
       maxCronJobs: number;
-    }
+    };
   } | null;
 
   energy: {
@@ -55,7 +55,7 @@ export type AdminUserDetails = {
     reservedUsd: string;
 
     lastTaskAt: string | null;
-  }
+  };
 
   payments: {
     id: number;
@@ -67,5 +67,5 @@ export type AdminUserDetails = {
 
     createdAt: string;
     paidAt: string | null;
-  }[]
-}
+  }[];
+};

@@ -50,22 +50,14 @@ export function UserProfileCard({ user }: UserProfileCardProps) {
             Telegram ID
           </p>
 
-          <p className="mt-1 font-mono text-sm">
-            {user.telegramId}
-          </p>
+          <p className="mt-1 font-mono text-sm">{user.telegramId}</p>
         </div>
 
         <div>
-          <p className="text-xs text-muted-foreground">
-            Status
-          </p>
+          <p className="text-xs text-muted-foreground">Status</p>
 
           <div className="mt-1">
-            <Badge
-              variant={
-              user.isActive ? 'secondary' : 'outline'
-              }
-            >
+            <Badge variant={user.isActive ? 'secondary' : 'outline'}>
               {user.isActive ? 'Active' : 'Inactive'}
             </Badge>
           </div>
@@ -78,9 +70,7 @@ export function UserProfileCard({ user }: UserProfileCardProps) {
           </p>
 
           <p className="mt-1 text-sm">
-            {dateFormatter.format(
-              new Date(user.createdAt),
-            )}
+            {dateFormatter.format(new Date(user.createdAt))}
           </p>
         </div>
       </CardContent>

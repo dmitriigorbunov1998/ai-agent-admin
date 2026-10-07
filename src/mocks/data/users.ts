@@ -21,21 +21,17 @@ export const usersMock: AdminUserListItem[] = Array.from(
               name: 'Freemium',
             };
 
-    const energy = plan.code === 'pro'
-      ? 78 - (index % 20)
-      : plan.code === 'lite'
-        ? 31 - (index % 12)
-        : Math.max(
-          0,
-          5 - (index % 6),
-        )
+    const energy =
+      plan.code === 'pro'
+        ? 78 - (index % 20)
+        : plan.code === 'lite'
+          ? 31 - (index % 12)
+          : Math.max(0, 5 - (index % 6));
 
     const subscriptionExpiresAt =
       plan.code === 'freemium'
         ? null
-        : new Date(
-          Date.now() + 1000 * 60 * 60 * 24 * 30,
-        ).toISOString();
+        : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString();
 
     return {
       id,
