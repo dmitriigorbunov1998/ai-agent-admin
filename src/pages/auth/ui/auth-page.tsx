@@ -75,7 +75,7 @@ export const AuthPage = () => {
   if (statusQuery.isPending) {
     return (
       <div className="flex min-h-screen items-center bg-background justify-center p-6">
-        <Skeleton className="h-[420px] w-full max-w-md rounded-xl" />
+        <Skeleton className="h-105 w-full max-w-md rounded-xl" />
       </div>
     );
   }

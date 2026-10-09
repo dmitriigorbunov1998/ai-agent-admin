@@ -6,19 +6,15 @@ import { createUserDetailsMock } from '@/mocks/data/user-detais';
 import { authMockState } from '@/mocks/data/auth';
 
 export const handlers = [
-  http.get(
-    '/api/admin/auth/status',
-    () => {
-      return HttpResponse.json({
-        setupRequired:
-          !authMockState.registered,
+  http.get('/api/admin/auth/status', () => {
+    return HttpResponse.json({
+      setupRequired: !authMockState.registered,
 
-        authenticated: authMockState.authenticated,
+      authenticated: authMockState.authenticated,
 
-        admin: authMockState.admin,
-      })
-    },
-  ),
+      admin: authMockState.admin,
+    });
+  }),
 
   http.get('/api/admin/dashboard', () => {
     return HttpResponse.json(dashboardSummaryMock);
@@ -70,41 +66,31 @@ export const handlers = [
     '/api/admin/auth/register',
 
     async ({ request }) => {
-      if (
-        authMockState.registered
-      ) {
+      if (authMockState.registered) {
         return HttpResponse.json(
           {
-            error:
-              'ADMIN_ALREADY_EXISTS',
+            error: 'ADMIN_ALREADY_EXISTS',
           },
           {
             status: 409,
           },
-        )
+        );
       }
 
-      const body =
-        (await request.json()) as {
+      const body = (await request.json()) as {
         login?: unknown;
         password?: unknown;
-        };
+      };
 
-      if (
-        typeof body.login !==
-          'string' ||
-        typeof body.password !==
-          'string'
-      ) {
+      if (typeof body.login !== 'string' || typeof body.password !== 'string') {
         return HttpResponse.json(
           {
-            error:
-              'INVALID_CREDENTIALS',
+            error: 'INVALID_CREDENTIALS',
           },
           {
             status: 400,
           },
-        )
+        );
       }
 
       authMockState.registered = true;
@@ -113,14 +99,12 @@ export const handlers = [
 
       authMockState.admin = {
         id: 1,
-        login:
-          body.login,
-      }
+        login: body.login,
+      };
 
-      return HttpResponse.json ({
-        admin:
-          authMockState.admin,
-      })
+      return HttpResponse.json({
+        admin: authMockState.admin,
+      });
     },
   ),
 
@@ -128,9 +112,7 @@ export const handlers = [
     '/api/admin/auth/login',
 
     async ({ request }) => {
-      if (
-        !authMockState.registered
-      ) {
+      if (!authMockState.registered) {
         return HttpResponse.json(
           {
             error: 'SETUP_REQUIRED',
@@ -138,19 +120,15 @@ export const handlers = [
           {
             status: 409,
           },
-        )
+        );
       }
 
-      const body =
-        (await request.json()) as {
+      const body = (await request.json()) as {
         login?: unknown;
         password?: unknown;
-        }
+      };
 
-      if (
-        typeof body.login !== 'string' ||
-        typeof body.password !== 'string'
-      ) {
+      if (typeof body.login !== 'string' || typeof body.password !== 'string') {
         return HttpResponse.json(
           {
             error: 'INVALID_CREDENTIALS',
@@ -158,7 +136,7 @@ export const handlers = [
           {
             status: 401,
           },
-        )
+        );
       }
 
       authMockState.authenticated = true;
@@ -166,11 +144,11 @@ export const handlers = [
       authMockState.admin = {
         id: 1,
         login: body.login,
-      }
+      };
 
-      return HttpResponse.json ({
+      return HttpResponse.json({
         admin: authMockState.admin,
-      })
+      });
     },
   ),
 
