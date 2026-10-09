@@ -1,24 +1,17 @@
-export type AdminIdentity = {
-  id: number;
-  login: string;
-};
-
-export type AuthStatus = {
-  setupRequired: boolean;
-  authenticated: boolean;
-  admin: AdminIdentity | null;
+export type AdminUser = {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  image: string | null;
+  role: string | null;
 };
 
 export type LoginPayload = {
-  login: string;
-  password: string;
-};
-
-export type RegisterPayload = {
-  login: string;
+  email: string;
   password: string;
 };
 
 export type AuthResponse = {
-  admin: AdminIdentity;
+  user: AdminUser;
 };
