@@ -1,13 +1,11 @@
-export { getAuthStatus } from './api/get-auth-status';
+export { getMe } from './api/get-me';
 
 export { login } from './api/login';
 
-export { register } from './api/register';
+export { logout } from './api/logout';
 
 export { authQueryKeys } from './model/query-keys';
 
 export { LoginForm } from './ui/login-form';
 
-export { RegisterForm } from './ui/register-form';
-
-export type { AuthStatus, AdminIdentify } from './model/types';
+export type { AdminUser, AuthResponse, LoginPayload } from './model/types';
