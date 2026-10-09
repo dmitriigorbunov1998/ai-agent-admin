@@ -85,7 +85,7 @@ export const AuthPage = () => {
       <div className="flex min-h-screen items-center justify-center bg-background p-6">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>Authentification unavailable</CardTitle>
+            <CardTitle>Authentication unavailable</CardTitle>
 
             <CardDescription>
               Clio Admin could not check the authentication state.
