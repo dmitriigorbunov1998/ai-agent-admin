@@ -25,16 +25,24 @@ export function AdminLayout() {
       <AppSidebar />
 
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
+        <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
 
-          <div className="flex flex-col">
-            <span className="text-sm font-medium">Clio Admin</span>
+            {/*<Separator orientation="vertical" className="mr-2 h-4" />*/}
 
-            <span className="text-xs text-muted-foreground">
-              Administration Console
-            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium">Clio Admin</span>
+
+              <span className="text-xs text-muted-foreground">
+                Administration Console
+              </span>
+            </div>
           </div>
+
+          {meQuery.data?.user && (
+            <AdminSessionControls user={meQuery.data.user} />
+          )}
         </header>
 
         <main className="flex flex-1 flex-col">

@@ -1,6 +1,6 @@
 import { LogOut, UserRound } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { UseNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -17,13 +17,13 @@ type AdminSessionControlsProps = {
 export function AdminSessionControls({ user }: AdminSessionControlsProps) {
   const navigate = useNavigate();
 
-  const useQueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const logoutMutation = useMutation({
     mutationFn: logout,
 
     onSuccess: () => {
-      useClient.removeQueries({
+      queryClient.removeQueries({
         queryKey: authQueryKeys.all,
       });
 
@@ -57,7 +57,7 @@ export function AdminSessionControls({ user }: AdminSessionControlsProps) {
         aria-label="Sign out"
         title="Sign out"
       >
-        <Logout className="size-4" />
+        <LogOut className="size-4" />
       </Button>
     </div>
   );
