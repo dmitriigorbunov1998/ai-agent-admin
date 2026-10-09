@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n WEB,BFF \"vite\" \"tsx watch server/index.ts\"",
+    "dev": "concurrently -k -n WEB,PROXY \"vite\" \"tsx watch server/index.ts\"",
     "dev:web": "vite",
-    "dev:bff": "tsx watch server/index.ts",
+    "dev:proxy": "tsx watch server/index.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

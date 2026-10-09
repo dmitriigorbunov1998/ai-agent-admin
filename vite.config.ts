@@ -9,13 +9,13 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '@': path.resolve(import.meta.dirname, './src'),
+      '@': path.resolve(_dirname, './src'),
     },
   },
 
   server: {
     proxy: {
-      '/api/admin': {
+      '/api/v1/admin': {
         target: 'http://127.0.0.1:3101',
 
         changeOrigin: true,
