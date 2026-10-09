@@ -13,6 +13,6 @@ export function getAdminUsers({ limit, offset }: GetAdminUsersParams) {
   });
 
   return apiClient<AdminUsersResponse>(
-    `/api/admin/users?${searchParams.toString()}`,
+    `/api/v1/admin/users?${searchParams.toString()}`,
   );
 }
