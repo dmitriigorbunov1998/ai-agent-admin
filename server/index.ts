@@ -20,7 +20,7 @@ app.use('/api/v1/admin', clioAdminProxy);
 
 app.get('/health', (_request, response) => {
   response.json({
-    status: ok,
+    status: 'ok',
   });
 });
 
