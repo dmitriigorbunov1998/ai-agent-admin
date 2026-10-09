@@ -104,7 +104,7 @@ export const LoginPage = () => {
 
         <Card>
           <CardHeader>
-            <div className="mb-3 flex size-10 items-center justfy-center rounded-lg bg-muted">
+            <div className="mb-3 flex size-10 items-center justify-center rounded-lg bg-muted">
               <ShieldCheck className="size-5" />
             </div>
 
