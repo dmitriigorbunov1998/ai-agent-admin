@@ -4,7 +4,7 @@ export function emitAuthUnauthorized() {
   window.dispatchEvent(new Event(AUTH_UNAUTHORIZED_EVENT));
 }
 
-export function subscribeToAuthUnauthrized(listener: () => void) {
+export function subscribeToAuthUnauthorized(listener: () => void) {
   window.addEventListener(AUTH_UNAUTHORIZED_EVENT, listener);
 
   return () => {

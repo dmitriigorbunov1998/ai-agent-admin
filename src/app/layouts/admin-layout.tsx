@@ -60,5 +60,3 @@ export function AdminLayout() {
     </>
   );
 }
-
-export { AuthUnauthorizedListener } from './ui/auth-unauthorized-listener';

@@ -1,6 +1,4 @@
-import {
-  emitAuthUnauthorized,
-} from './auth-events';
+import { emitAuthUnauthorized } from './auth-events';
 
 export class ApiError extends Error {
   public readonly status: number;
@@ -15,19 +13,15 @@ export class ApiError extends Error {
 
 const API_URL = (import.meta.env.VITE_API_URL ?? '').replace(/^\//, '');
 
-const ApiClientOptions = RequestInit & {
-  skipUnauthorizedEvent: boolean,
-}
+type ApiClientOptions = RequestInit & {
+  skipUnauthorizedEvent?: boolean;
+};
 
 export async function apiClient<T>(
   path: string,
   options?: ApiClientOptions,
 ): Promise<T> {
-
-  const {
-    skipUnauthorizedEvent = false,
-    ...requestOptions
-  } = options ?? {};
+  const { skipUnauthorizedEvent = false, ...requestOptions } = options ?? {};
 
   const response = await fetch(`${API_URL}${path}`, {
     ...requestOptions,

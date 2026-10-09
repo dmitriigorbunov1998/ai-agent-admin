@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useQueryClient } from '@/tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { subscribeToAuthUnauthorized } from '@/shared/api/auth-events';
 
-import { authQuetyKeys } from '../model/query-keys';
+import { authQueryKeys } from '../model/query-keys';
 
 export function AuthUnauthorizedListener() {
   const queryClient = useQueryClient();

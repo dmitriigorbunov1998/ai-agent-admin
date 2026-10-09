@@ -10,4 +10,6 @@ export { LoginForm } from './ui/login-form';
 
 export { AdminSessionControls } from './ui/admin-session-controls';
 
+export { AuthUnauthorizedListener } from './ui/auth-unauthorized-listener';
+
 export type { AdminUser, AuthResponse, LoginPayload } from './model/types';
