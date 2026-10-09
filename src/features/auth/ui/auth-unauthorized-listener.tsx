@@ -16,7 +16,7 @@ export function AuthUnauthorizedListener() {
   useEffect(() => {
     return subscribeToAuthUnauthorized(() => {
       queryClient.removeQueries({
-        queryKey: authQuetyKeys.all,
+        queryKey: authQueryKeys.all,
       });
 
       if (location.pathname === '/login') {

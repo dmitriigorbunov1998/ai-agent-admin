@@ -60,7 +60,7 @@ export function createUserDetailsMock(
       startedAt: createdAt,
 
       expiresAt:
-        user.subscriptionExpiresAt ??
+        user.createdAt ??
         new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString(),
 
       plan,

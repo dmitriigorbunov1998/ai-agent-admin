@@ -16,7 +16,7 @@ import { authQueryKeys, getMe, login, LoginForm } from '@/features/auth';
 
 import { ApiError } from '@/shared/api';
 
-type LoginLocationProps = {
+type LoginLocationState = {
   from?: string;
 };
 
