@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AdminLayout } from '@/app/layouts/admin-layout';
 import { RequireAuth } from '@/app/router/require-auth';
 
-import { AuthPage } from '@/pages/auth/ui/auth-page';
+import { LoginPage } from '@/pages/login/ui/login-page';
 import { AiUsagePage } from '@/pages/ai-usage/ui/ai-usage-page';
 import { DashboardPage } from '@/pages/dashboard/ui/dashboard-page';
 import { PaymentsPage } from '@/pages/payments/ui/payments-page';
@@ -14,8 +14,8 @@ import { UserDetailsPage } from '@/pages/user-details/ui/user-details-page';
 
 export const router = createBrowserRouter([
   {
-    path: '/auth',
-    element: <AuthPage />,
+    path: '/login',
+    element: <LoginPage />,
   },
 
   {

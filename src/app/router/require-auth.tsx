@@ -1,20 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { authQueryKeys, getAuthStatus } from '@/features/auth';
+import { authQueryKeys, getMe } from '@/features/auth';
 
 export function RequireAuth() {
   const location = useLocation();
 
-  const authQuery = useQuery({
-    queryKey: authQueryKeys.status(),
+  const meQuery = useQuery({
+    queryKey: authQueryKeys.me(),
 
-    queryFn: getAuthStatus,
+    queryFn: getMe,
 
-    staleTime: 30_000,
+    retry: false,
   });
 
-  if (authQuery.isPending) {
+  if (meQuery.isPending) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <span className="text-sm text-muted-foreground">
@@ -24,10 +24,10 @@ export function RequireAuth() {
     );
   }
 
-  if (authQuery.isError || !authQuery.data.authenticated) {
+  if (meQuery.isError) {
     return (
       <Navigate
-        to="/auth"
+        to="/login"
         replace
         state={{
           from: `${location.pathname}${location.search}`,
