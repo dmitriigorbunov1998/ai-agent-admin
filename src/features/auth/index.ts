@@ -8,4 +8,6 @@ export { authQueryKeys } from './model/query-keys';
 
 export { LoginForm } from './ui/login-form';
 
+export { AdminSessionControls } from './ui/admin-session-controls';
+
 export type { AdminUser, AuthResponse, LoginPayload } from './model/types';

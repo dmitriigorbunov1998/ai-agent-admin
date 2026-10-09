@@ -7,7 +7,19 @@ import {
 } from '@/components/ui/sidebar.tsx';
 import { AppSidebar } from '@/widgets/app-sidebar';
 
+import { useQuery } from '@tanstack/react-query';
+
+import { AdminSessionControls, authQueryKeys, getMe } from '@/features/auth';
+
 export function AdminLayout() {
+  const meQuery = useQuery({
+    queryKey: authQueryKeys.me(),
+
+    queryFn: getMe,
+
+    retry: false,
+  });
+
   return (
     <SidebarProvider>
       <AppSidebar />
