@@ -9,8 +9,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
+} from '@/components/ui/card.tsx';
+import { Skeleton } from '@/components/ui/skeleton.tsx';
 
 import {
   authQueryKeys,
