@@ -113,6 +113,16 @@ export const handlers = [
     },
   ),
 
+  http.post('/api/v1/admin/auth/logout', () => {
+    authMockState.authenticated = false;
+
+    authMockState.user = null;
+
+    return new HttpResponse(null, {
+      status: 204,
+    });
+  }),
+
   http.post(
     '/api/admin/users/:telegramId/energy/grants',
 
