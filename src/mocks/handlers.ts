@@ -70,6 +70,50 @@ export const handlers = [
   }),
 
   http.post(
+    '/api/v1/admin/auth/login',
+
+    async ({ request }) => {
+      const body = (await request.json()) as {
+        email?: unknown;
+        password?: unknown;
+      };
+
+      if (typeof body.email !== 'string' || typeof body.password !== 'string') {
+        return HttpResponse.json(
+          {
+            error: 'INVALID_REQUEST',
+          },
+          {
+            status: 400,
+          },
+        );
+      }
+
+      if (
+        body.email !== 'admin@example.com' ||
+        body.password !== 'admin-password-123'
+      ) {
+        return HttpResponse.json(
+          {
+            error: 'INVALID_CREDENTIALS',
+          },
+          {
+            status: 401,
+          },
+        );
+      }
+
+      authMockState.authenticated = true;
+
+      authMockState.user = mockAdminUser;
+
+      return HttpResponse.json({
+        user: mockAdminUser,
+      });
+    },
+  ),
+
+  http.post(
     '/api/admin/users/:telegramId/energy/grants',
 
     async ({ params, request }) => {
