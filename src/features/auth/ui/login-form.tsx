@@ -30,7 +30,7 @@ export function LoginForm({ isPending = false, onSubmit }: LoginFormProps) {
     resolver: zodResolver(loginSchema),
 
     defaultValues: {
-      login: '',
+      email: '',
       password: '',
     },
   });
@@ -39,20 +39,21 @@ export function LoginForm({ isPending = false, onSubmit }: LoginFormProps) {
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
         <Controller
-          name="login"
+          name="email"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="login">Login</FieldLabel>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
 
               <Input
                 {...field}
-                id="login"
+                id="email"
+                type="email"
                 autoComplete="username"
                 autoFocus
                 disabled={isPending}
                 aria-invalid={fieldState.invalid}
-                placeholder="admin"
+                placeholder="admin@example.com"
               />
 
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
