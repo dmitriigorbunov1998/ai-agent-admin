@@ -3,8 +3,23 @@ import { HttpResponse, http } from 'msw';
 import { dashboardSummaryMock } from '@/mocks/data/dashboard';
 import { usersMock } from '@/mocks/data/users';
 import { createUserDetailsMock } from '@/mocks/data/user-detais';
+import { authMockState } from '@/mocks/data/auth';
 
 export const handlers = [
+  http.get(
+    '/api/admin/auth/status',
+    () => {
+      return HttpResponse.json({
+        setupRequired:
+          !authMockState.registered,
+
+        authenticated: authMockState.authenticated,
+
+        admin: authMockState.admin,
+      })
+    },
+  ),
+
   http.get('/api/admin/dashboard', () => {
     return HttpResponse.json(dashboardSummaryMock);
   }),
@@ -50,6 +65,114 @@ export const handlers = [
 
     return HttpResponse.json(createUserDetailsMock(user));
   }),
+
+  http.post(
+    '/api/admin/auth/register',
+
+    async ({ request }) => {
+      if (
+        authMockState.registered
+      ) {
+        return HttpResponse.json(
+          {
+            error:
+              'ADMIN_ALREADY_EXISTS',
+          },
+          {
+            status: 409,
+          },
+        )
+      }
+
+      const body =
+        (await request.json()) as {
+        login?: unknown;
+        password?: unknown;
+        };
+
+      if (
+        typeof body.login !==
+          'string' ||
+        typeof body.password !==
+          'string'
+      ) {
+        return HttpResponse.json(
+          {
+            error:
+              'INVALID_CREDENTIALS',
+          },
+          {
+            status: 400,
+          },
+        )
+      }
+
+      authMockState.registered = true;
+
+      authMockState.authenticated = true;
+
+      authMockState.admin = {
+        id: 1,
+        login:
+          body.login,
+      }
+
+      return HttpResponse.json ({
+        admin:
+          authMockState.admin,
+      })
+    },
+  ),
+
+  http.post(
+    '/api/admin/auth/login',
+
+    async ({ request }) => {
+      if (
+        !authMockState.registered
+      ) {
+        return HttpResponse.json(
+          {
+            error: 'SETUP_REQUIRED',
+          },
+          {
+            status: 409,
+          },
+        )
+      }
+
+      const body =
+        (await request.json()) as {
+        login?: unknown;
+        password?: unknown;
+        }
+
+      if (
+        typeof body.login !== 'string' ||
+        typeof body.password !== 'string'
+      ) {
+        return HttpResponse.json(
+          {
+            error: 'INVALID_CREDENTIALS',
+          },
+          {
+            status: 401,
+          },
+        )
+      }
+
+      authMockState.authenticated = true;
+
+      authMockState.admin = {
+        id: 1,
+        login: body.login,
+      }
+
+      return HttpResponse.json ({
+        admin: authMockState.admin,
+      })
+    },
+  ),
 
   http.post(
     '/api/admin/users/:telegramId/energy/grants',
