@@ -45,7 +45,7 @@ export const LoginPage = () => {
 
       const state = location.state as LoginLocationState | null;
 
-      navigate(state?.from ?? '/dashboard', {
+      navigate(state?.from ?? '/users', {
         replace: true,
       });
     },
@@ -84,7 +84,7 @@ export const LoginPage = () => {
   }
 
   if (meQuery.isSuccess) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/users" replace />;
   }
 
   return (
